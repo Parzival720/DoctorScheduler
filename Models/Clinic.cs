@@ -25,7 +25,16 @@ namespace DoctorScheduler.Models
                 Console.WriteLine("Appointment is Invalid");
                 return false;
             }
-
+            if (!Patients.Contains(appointment.Patient))
+            {
+                AddNewPatient(appointment.Patient);
+            }
+            if (!Doctors.Contains(appointment.Doctor))
+            {
+                AddNewDoctor(appointment.Doctor);
+            }
+            appointment.Patient.Schedule.Add(appointment.DateTime.ToString(), appointment);
+            appointment.Doctor.Schedule.Add(appointment.DateTime.ToString(), appointment);
             return true;
         }
 
