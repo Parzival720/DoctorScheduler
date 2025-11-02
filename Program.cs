@@ -1,4 +1,5 @@
 ﻿
+using DoctorScheduler.Logic;
 using DoctorScheduler.Models;
 
 Doctor doctor1 = new("Steven", "Strange");
@@ -19,6 +20,21 @@ Console.WriteLine(appointment1);
 
 bool success = sampleClinic.ScheduleNewAppointment(appointment1);
 Console.WriteLine($"{success}: {appointment1}");
+
+DateTime invalidMinutes = new(2021, 11, 1, 15, 30, 0);
+ValidityChecker.DateIsValid(invalidMinutes);
+
+DateTime invalidHour = new(2021, 11, 1, 17, 0, 0);
+ValidityChecker.DateIsValid(invalidHour);
+
+DateTime invalidDay = new(2021, 11, 6, 15, 0, 0);
+ValidityChecker.DateIsValid(invalidDay);
+
+DateTime invalidMonth = new(2021, 5, 12, 15, 0, 0);
+ValidityChecker.DateIsValid(invalidMonth);
+
+DateTime invalidYear = new(2020, 11, 1, 15, 0, 0);
+ValidityChecker.DateIsValid(invalidYear);
 
 // Connect to API and get initial state of schedule
 
