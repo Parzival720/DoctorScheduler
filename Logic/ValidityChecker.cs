@@ -18,7 +18,21 @@ namespace DoctorScheduler.Logic
                 return false;
             }
             // Check if Doctor has a conflict
+            if (CheckDoctorConflict(appointment))
+            {
+                return false;
+            }
             return true;
+        }
+
+        private static bool CheckDoctorConflict(Appointment appointment)
+        {
+            if (appointment.Doctor.Schedule.ContainsKey(appointment.DateTime.ToString()))
+            {
+                Console.WriteLine("Doctor already has an appointment at the scheduled time.");
+                return true;
+            }
+            return false;
         }
 
         private static bool CheckPatientConflict(Clinic clinic, Appointment appointment)
