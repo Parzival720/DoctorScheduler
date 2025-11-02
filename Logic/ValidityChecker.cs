@@ -4,7 +4,7 @@ namespace DoctorScheduler.Logic
 {
     public static class ValidityChecker
     {
-        public static bool AppointmentIsValid(Appointment appointment)
+        public static bool AppointmentIsValid(Clinic clinic, Appointment appointment)
         {
             // Check if the date is valid
             if (!DateIsValid(appointment.DateTime))
@@ -13,10 +13,23 @@ namespace DoctorScheduler.Logic
                 return false;
             }
             // Check if Patient has a conflict
-
+            if (CheckPatientConflict(clinic, appointment))
+            {
+                return false;
+            }
             // Check if Doctor has a conflict
-            
             return true;
+        }
+
+        private static bool CheckPatientConflict(Clinic clinic, Appointment appointment)
+        {
+            if (clinic.Patients.Contains(appointment.Patient) && !(appointment.DateTime.Hour == 15 || appointment.DateTime.Hour == 16))
+            {
+                Console.WriteLine("New Patient must be scheduled at 3pm or 4pm");
+                return true;
+            }
+            // Check if Patient has an appointment within one week
+            return false;
         }
 
         public static bool DateIsValid(DateTime dateTime)

@@ -20,7 +20,7 @@ namespace DoctorScheduler.Models
 
         public bool ScheduleNewAppointment(Appointment appointment)
         {
-            if (!ValidityChecker.AppointmentIsValid(appointment))
+            if (!ValidityChecker.AppointmentIsValid(this, appointment))
             {
                 Console.WriteLine("Appointment is Invalid");
                 return false;
