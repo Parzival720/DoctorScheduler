@@ -5,6 +5,10 @@ namespace DoctorScheduler.Models
         public Doctor Doctor = doctor;
         public Patient Patient = patient;
         public DateTime DateTime = dateTime;
-        
+
+        public override string ToString()
+        {
+            return $"{Doctor} with {Patient} at {DateTime}";
+        }
     }
 }

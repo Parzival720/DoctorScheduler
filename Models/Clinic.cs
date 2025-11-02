@@ -15,5 +15,21 @@ namespace DoctorScheduler.Models
         {
             Patients.Add(patient);
         }
+
+        public void PrintDoctorList()
+        {
+            foreach (Doctor d in Doctors)
+            {
+                Console.WriteLine(d);
+            }
+        }
+
+        public void PrintPatientList()
+        {
+            foreach (Patient p in Patients)
+            {
+                Console.WriteLine(p);
+            }
+        }
     }
 }

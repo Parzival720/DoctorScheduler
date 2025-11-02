@@ -15,6 +15,11 @@ namespace DoctorScheduler.Models
         {
             return $"{FirstName} {LastName}";
         }
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 
     public class Doctor(string firstName, string lastName) : Person(firstName, lastName)
@@ -22,6 +27,11 @@ namespace DoctorScheduler.Models
         public string GetDoctorName()
         {
             return $"Doctor {LastName}";
+        }
+
+        public override string ToString()
+        {
+            return $"Doctor {base.ToString()}";
         }
     }
 
