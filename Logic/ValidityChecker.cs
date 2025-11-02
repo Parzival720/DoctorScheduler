@@ -37,7 +37,7 @@ namespace DoctorScheduler.Logic
 
         private static bool CheckPatientConflict(Clinic clinic, Appointment appointment)
         {
-            if (clinic.Patients.Contains(appointment.Patient) && !(appointment.DateTime.Hour == 15 || appointment.DateTime.Hour == 16))
+            if (!clinic.Patients.Contains(appointment.Patient) && !(appointment.DateTime.Hour == 15 || appointment.DateTime.Hour == 16))
             {
                 Console.WriteLine("New Patient must be scheduled at 3pm or 4pm");
                 return true;
