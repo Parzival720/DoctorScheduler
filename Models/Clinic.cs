@@ -1,3 +1,5 @@
+using DoctorScheduler.Logic;
+
 namespace DoctorScheduler.Models
 {
     public class Clinic(string name)
@@ -14,6 +16,17 @@ namespace DoctorScheduler.Models
         public void AddNewPatient(Patient patient)
         {
             Patients.Add(patient);
+        }
+
+        public bool ScheduleNewAppointment(Appointment appointment)
+        {
+            if (!ValidityChecker.AppointmentIsValid(appointment))
+            {
+                Console.WriteLine("Appointment is Invalid");
+                return false;
+            }
+
+            return true;
         }
 
         public void PrintDoctorList()

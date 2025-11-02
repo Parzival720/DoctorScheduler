@@ -17,6 +17,8 @@ DateTime nov1_3pm = new(2021, 11, 1, 15, 0, 0);
 Appointment appointment1 = new(doctor1, patient1, nov1_3pm);
 Console.WriteLine(appointment1);
 
+bool success = sampleClinic.ScheduleNewAppointment(appointment1);
+Console.WriteLine($"{success}: {appointment1}");
 
 // Connect to API and get initial state of schedule
 
