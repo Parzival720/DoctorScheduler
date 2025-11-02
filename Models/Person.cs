@@ -16,6 +16,21 @@ namespace DoctorScheduler.Models
             return $"{FirstName} {LastName}";
         }
 
+        public bool Equals(Person? other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            return GetFullName == other.GetFullName;
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as Person);
+        public override int GetHashCode()
+        {
+            return FirstName.GetHashCode() ^ LastName.GetHashCode();
+        }
+
         public override string ToString()
         {
             return $"{FirstName} {LastName}";
