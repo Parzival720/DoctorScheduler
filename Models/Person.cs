@@ -1,11 +1,34 @@
+using System.Runtime.CompilerServices;
+
 namespace DoctorScheduler.Models
 {
-    public class Person(string firstName, string lastName)
+    public class Person
     {
-        public string FirstName { get; set; } = firstName;
-        public string LastName { get; set; } = lastName;
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Id { get; set; }
         public Dictionary<string, Appointment> Schedule { get; set; } = [];
 
+        public Person(string firstName, string lastName, int id)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Id = id;
+        }
+
+        public Person(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Random random = new();
+            Id = random.Next();
+        }
+
+        public Person(int id) : this("John", "Doe", id)
+        {
+
+        }
+        
         public void AddAppointment(Appointment appointment)
         {
             Schedule.Add(appointment.DateTime.ToString(), appointment);
@@ -28,7 +51,7 @@ namespace DoctorScheduler.Models
         public override bool Equals(object? obj) => Equals(obj as Person);
         public override int GetHashCode()
         {
-            return FirstName.GetHashCode() ^ LastName.GetHashCode();
+            return Id.GetHashCode();
         }
 
         public override string ToString()
@@ -37,8 +60,14 @@ namespace DoctorScheduler.Models
         }
     }
 
-    public class Doctor(string firstName, string lastName) : Person(firstName, lastName)
+    public class Doctor : Person
     {
+
+        public Doctor(string firstName, string lastName) : base(firstName, lastName) {}
+        
+        public Doctor(int id) : base(id) {}
+
+
         public string GetDoctorName()
         {
             return $"Doctor {LastName}";
@@ -50,8 +79,10 @@ namespace DoctorScheduler.Models
         }
     }
 
-    public class Patient(string firstName, string lastName) : Person(firstName, lastName)
+    public class Patient : Person
     {
+        public Patient(string firstName, string lastName) : base(firstName, lastName) {}
         
+        public Patient(int id) : base(id) {}
     }
 }
