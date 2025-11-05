@@ -18,12 +18,42 @@ namespace DoctorScheduler.Models
             Patients.Add(patient);
         }
 
+        public bool IsNewPatient(Patient patient)
+        {
+            return !Patients.Contains(patient);
+        }
+
+        public Patient? GetPatient(int id)
+        {
+            return Patients.FirstOrDefault(patient => patient.Id == id);
+        }
+
+        public Doctor? GetDoctor(int id)
+        {
+            return Doctors.FirstOrDefault(doctor => doctor.Id == id);
+        }
+
         public bool ScheduleNewAppointment(Appointment appointment)
         {
             if (!ValidityChecker.AppointmentIsValid(this, appointment))
             {
                 return false;
             }
+            if (!Patients.Contains(appointment.Patient))
+            {
+                AddNewPatient(appointment.Patient);
+            }
+            if (!Doctors.Contains(appointment.Doctor))
+            {
+                AddNewDoctor(appointment.Doctor);
+            }
+            appointment.Patient.Schedule.Add(appointment.DateTime.ToString(), appointment);
+            appointment.Doctor.Schedule.Add(appointment.DateTime.ToString(), appointment);
+            return true;
+        }
+
+        public bool AddAppointmentToSchedule(Appointment appointment)
+        {
             if (!Patients.Contains(appointment.Patient))
             {
                 AddNewPatient(appointment.Patient);
